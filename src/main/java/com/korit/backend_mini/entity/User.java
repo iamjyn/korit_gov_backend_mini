@@ -20,6 +20,13 @@ public class User {
     private String profileImg;
     private LocalDateTime createDt;
     private LocalDateTime updateDt;
+    private String status;
+    private LocalDateTime withdrawDt;
+    private LocalDateTime deleteDt;
 
     private List<UserRole> userRoles;
+
+    public boolean isActive() {
+        return "ACTIVE".equals(status);
+    }
 }

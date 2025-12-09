@@ -1,6 +1,6 @@
 package com.korit.backend_mini.mapper;
 
-import com.korit.backend_mini.dto.resp.BoardRespDto;
+import com.korit.backend_mini.dto.board.BoardRespDto;
 import com.korit.backend_mini.entity.Board;
 import org.apache.ibatis.annotations.Mapper;
 

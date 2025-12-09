@@ -5,6 +5,7 @@ import com.korit.backend_mini.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -43,5 +44,17 @@ public class UserRepository {
 
     public int changeUsername(User user) {
         return userMapper.changeUsername(user);
+    }
+
+    public List<User> getUserList() {
+        return userMapper.getUserList();
+    }
+
+    public int withdraw(Integer userId) {
+        return userMapper.withdraw(userId);
+    }
+
+    public void deleteUser() {
+        userMapper.deleteUser();
     }
 }

@@ -1,6 +1,6 @@
 package com.korit.backend_mini.service;
 
-import com.korit.backend_mini.dto.resp.ApiRespDto;
+import com.korit.backend_mini.dto.ApiRespDto;
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.entity.UserRole;
 import com.korit.backend_mini.repository.UserRepository;

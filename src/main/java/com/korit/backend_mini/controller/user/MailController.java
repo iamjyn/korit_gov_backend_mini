@@ -1,4 +1,4 @@
-package com.korit.backend_mini.controller;
+package com.korit.backend_mini.controller.user;
 
 import com.korit.backend_mini.secrity.model.PrincipalUser;
 import com.korit.backend_mini.service.MailService;

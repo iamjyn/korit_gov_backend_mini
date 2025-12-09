@@ -19,6 +19,7 @@ public class PrincipalUser implements UserDetails {
     private String password;
     private String username;
     private String profileImg;
+    private String status;
     private List<UserRole> userRoles;
 
     @Override

@@ -1,6 +1,6 @@
 package com.korit.backend_mini.secrity.handler;
 
-import com.korit.backend_mini.dto.resp.ApiRespDto;
+import com.korit.backend_mini.dto.ApiRespDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

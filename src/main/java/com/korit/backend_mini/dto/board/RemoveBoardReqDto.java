@@ -1,11 +1,11 @@
-package com.korit.backend_mini.dto.req;
+package com.korit.backend_mini.dto.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ChangeUsernameReqDto {
+public class RemoveBoardReqDto {
+    private Integer boardId;
     private Integer userId;
-    private String username;
 }

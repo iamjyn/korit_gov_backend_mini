@@ -1,10 +1,10 @@
 package com.korit.backend_mini.service;
 
-import com.korit.backend_mini.dto.req.AddBoardReqDto;
-import com.korit.backend_mini.dto.req.ModifyBoardReqDto;
-import com.korit.backend_mini.dto.req.RemoveBoardReqDto;
-import com.korit.backend_mini.dto.resp.ApiRespDto;
-import com.korit.backend_mini.dto.resp.BoardRespDto;
+import com.korit.backend_mini.dto.board.AddBoardReqDto;
+import com.korit.backend_mini.dto.board.ModifyBoardReqDto;
+import com.korit.backend_mini.dto.board.RemoveBoardReqDto;
+import com.korit.backend_mini.dto.ApiRespDto;
+import com.korit.backend_mini.dto.board.BoardRespDto;
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.repository.BoardRepository;
 import com.korit.backend_mini.repository.UserRepository;

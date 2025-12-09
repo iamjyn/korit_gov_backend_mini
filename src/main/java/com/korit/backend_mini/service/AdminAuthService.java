@@ -1,8 +1,8 @@
 package com.korit.backend_mini.service;
 
-import com.korit.backend_mini.dto.req.SigninReqDto;
-import com.korit.backend_mini.dto.req.SignupReqDto;
-import com.korit.backend_mini.dto.resp.ApiRespDto;
+import com.korit.backend_mini.dto.auth.SigninReqDto;
+import com.korit.backend_mini.dto.auth.SignupReqDto;
+import com.korit.backend_mini.dto.ApiRespDto;
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.entity.UserRole;
 import com.korit.backend_mini.repository.UserRepository;
@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,6 +68,11 @@ public class AdminAuthService {
 
         if (!bCryptPasswordEncoder.matches(signinReqDto.getPassword(), foundUser.get().getPassword())) {
             return new ApiRespDto<>("failed", "사용자 정보를 다시 확인해주세요", null);
+        }
+
+        List<UserRole> userRoles = foundUser.get().getUserRoles();
+        if (userRoles.stream().noneMatch(userRole -> userRole.getRoleId() == 1)) {
+            return new ApiRespDto<>("failed", "접근 권한이 없습니다.", null);
         }
 
         String accessToken = jwtUtils.generateAccessToken(foundUser.get().getUserId().toString());

@@ -13,7 +13,7 @@
         <result property="updateDt" column="update_dt"/>
     </resultMap>
 
-    <resultMap id="BoardRespResultMap" type="com.korit.backend_mini.dto.resp.BoardRespDto">
+    <resultMap id="BoardRespResultMap" type="com.korit.backend_mini.dto.board.BoardRespDto">
         <id property="boardId" column="board_id"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
