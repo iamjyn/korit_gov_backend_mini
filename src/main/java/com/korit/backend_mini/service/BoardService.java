@@ -1,17 +1,16 @@
 package com.korit.backend_mini.service;
 
-import com.korit.backend_mini.dto.board.AddBoardReqDto;
-import com.korit.backend_mini.dto.board.ModifyBoardReqDto;
-import com.korit.backend_mini.dto.board.RemoveBoardReqDto;
+import com.korit.backend_mini.dto.board.*;
 import com.korit.backend_mini.dto.ApiRespDto;
-import com.korit.backend_mini.dto.board.BoardRespDto;
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.repository.BoardRepository;
 import com.korit.backend_mini.repository.UserRepository;
-import com.korit.backend_mini.secrity.model.PrincipalUser;
+import com.korit.backend_mini.security.model.PrincipalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,6 +44,28 @@ public class BoardService {
         return new ApiRespDto<>("success", "게시글 전체 완료", boardRepository.getBoardList());
     }
 
+    public ApiRespDto<?> getBoardInfinite(Integer limit, LocalDateTime cursorCreateDt, Integer cursorBoardId) {
+        int limitPlusOne = limit + 1;
+
+        List<BoardRespDto> boardRespDtoList = boardRepository.getBoardInfinite(cursorCreateDt, cursorBoardId, limitPlusOne);
+
+        boolean hasNext = boardRespDtoList.size() > limit;
+        if (hasNext) {
+            boardRespDtoList = boardRespDtoList.subList(0, limit);
+        }
+
+        BoardNextCursor boardNextCursor = null;
+        if (!boardRespDtoList.isEmpty() && hasNext) {
+            BoardRespDto last = boardRespDtoList.get(boardRespDtoList.size() -1);
+            boardNextCursor = new BoardNextCursor(last.getCreateDt(), last.getBoardId());
+
+        }
+
+        BoardInfiniteRespDto boardInfiniteRespDto = new BoardInfiniteRespDto(boardRespDtoList, hasNext, boardNextCursor);
+
+        return new ApiRespDto<>("success", "무한 스크롤 조회 완료", boardInfiniteRespDto);
+    }
+
     public ApiRespDto<?> getBoardByBoardId(Integer boardId) {
         Optional<BoardRespDto> foundBoard = boardRepository.getBoardByBoardId(boardId);
         if (foundBoard.isEmpty()) {
@@ -76,9 +97,9 @@ public class BoardService {
 
     public ApiRespDto<?> removeBoard(RemoveBoardReqDto removeBoardReqDto, PrincipalUser principalUser) {
         if (!removeBoardReqDto.getUserId().equals(principalUser.getUserId())
-                && !principalUser.getUserRoles()
+                && principalUser.getUserRoles()
                 .stream()
-                .anyMatch(userRole -> userRole.getRole().getRoleId() == 1)) {
+                .noneMatch(userRole -> userRole.getRole().getRoleId() == 1)) {
             return new ApiRespDto<>("failed", "잘못된 접근입니다.", null);
         }
 

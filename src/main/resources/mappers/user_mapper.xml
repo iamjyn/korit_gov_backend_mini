@@ -47,7 +47,7 @@
         from
             user_tb ut
             join user_role_tb urt on (ut.user_id = urt.user_id)
-            join role_tb rt on (rt.role_id = urt.role_id)
+            join role_tb rt on (urt.role_id = rt.role_id)
         where
             ut.user_id = #{userId};
     </select>
@@ -66,7 +66,7 @@
         from
             user_tb ut
             join user_role_tb urt on (ut.user_id = urt.user_id)
-            join role_tb rt on (rt.role_id = urt.role_id)
+            join role_tb rt on (urt.role_id = rt.role_id)
         where
             ut.email = #{email};
     </select>
@@ -85,7 +85,7 @@
         from
             user_tb ut
             join user_role_tb urt on (ut.user_id = urt.user_id)
-            join role_tb rt on (rt.role_id = urt.role_id)
+            join role_tb rt on (urt.role_id = rt.role_id)
         where
             ut.username = #{username};
     </select>
@@ -104,7 +104,7 @@
         from
             user_tb ut
             join user_role_tb urt on (ut.user_id = urt.user_id)
-            join role_tb rt on (rt.role_id = urt.role_id)
+            join role_tb rt on (urt.role_id = rt.role_id)
         where
             urt.role_id = 2 or urt.role_id = 3;
     </select>
@@ -113,7 +113,7 @@
         insert into
             user_tb
         values
-            (0, #{email}, #{password}, #{username}, null, now(), null, "ACTIVE", null, null);
+            (0, #{email}, #{password}, #{username}, "https://firebasestorage.googleapis.com/v0/b/board-study-30e6a.firebasestorage.app/o/profile-img%2F%EA%B8%B0%EB%B3%B8%20%EC%9D%B4%EB%AF%B8%EC%A7%80.webp?alt=media&amp;token=39c07af2-9a16-4219-aff8-915e2d6902c2", now(), null, "ACTIVE", null, null);
     </insert>
 
     <update id="changePassword">
@@ -131,6 +131,16 @@
             user_tb
         set
             username = #{username},
+            update_dt = now()
+        where
+            user_id = #{userId};
+    </update>
+
+    <update id="changeProfileImg">
+        update
+            user_tb
+        set
+            profile_img = #{profileImg},
             update_dt = now()
         where
             user_id = #{userId};

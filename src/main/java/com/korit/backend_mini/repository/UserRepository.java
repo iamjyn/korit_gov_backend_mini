@@ -46,6 +46,10 @@ public class UserRepository {
         return userMapper.changeUsername(user);
     }
 
+    public int changeProfileImg(User user) {
+        return userMapper.changeProfileImg(user);
+    }
+
     public List<User> getUserList() {
         return userMapper.getUserList();
     }

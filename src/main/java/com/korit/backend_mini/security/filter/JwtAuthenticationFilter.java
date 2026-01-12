@@ -1,9 +1,9 @@
-package com.korit.backend_mini.secrity.filter;
+package com.korit.backend_mini.security.filter;
 
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.repository.UserRepository;
-import com.korit.backend_mini.secrity.jwt.JwtUtils;
-import com.korit.backend_mini.secrity.model.PrincipalUser;
+import com.korit.backend_mini.security.jwt.JwtUtils;
+import com.korit.backend_mini.security.model.PrincipalUser;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,6 +62,9 @@ public class JwtAuthenticationFilter implements Filter {
                     Authentication authentication = new UsernamePasswordAuthenticationToken(principalUser, "", principalUser.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
 
+//                    System.out.println("userId=" + principalUser.getUserId());
+//                    System.out.println("userRoles=" + (principalUser.getUserRoles() == null ? "null" : principalUser.getUserRoles().size()));
+//                    System.out.println("authorities=" + principalUser.getAuthorities());
                 }, () -> {
                     throw new AuthenticationServiceException("인증 실패");
                 });
@@ -69,6 +72,9 @@ public class JwtAuthenticationFilter implements Filter {
                 e.printStackTrace();
             }
         }
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
+
+
 }

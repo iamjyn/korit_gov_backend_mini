@@ -1,6 +1,7 @@
 package com.korit.backend_mini.controller;
 
 import com.korit.backend_mini.dto.OAuth2MergeReqDto;
+import com.korit.backend_mini.dto.OAuth2SignupReqDto;
 import com.korit.backend_mini.service.OAuth2AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,11 @@ public class OAuth2AuthController {
 
     @Autowired
     private OAuth2AuthService oAuth2AuthService;
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signup(@RequestBody OAuth2SignupReqDto oAuth2SignupReqDto) {
+        return ResponseEntity.ok(oAuth2AuthService.signup(oAuth2SignupReqDto));
+    }
 
     @PostMapping("/merge")
     public ResponseEntity<?> merge(@RequestBody OAuth2MergeReqDto oAuth2MergeReqDto) {

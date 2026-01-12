@@ -7,7 +7,7 @@ import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.entity.UserRole;
 import com.korit.backend_mini.repository.UserRepository;
 import com.korit.backend_mini.repository.UserRoleRepository;
-import com.korit.backend_mini.secrity.jwt.JwtUtils;
+import com.korit.backend_mini.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

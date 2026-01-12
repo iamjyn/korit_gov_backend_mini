@@ -1,4 +1,4 @@
-package com.korit.backend_mini.secrity.handler;
+package com.korit.backend_mini.security.handler;
 
 import com.korit.backend_mini.dto.ApiRespDto;
 import org.springframework.http.ResponseEntity;

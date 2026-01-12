@@ -1,7 +1,7 @@
 package com.korit.backend_mini.config;
 
-import com.korit.backend_mini.secrity.filter.JwtAuthenticationFilter;
-import com.korit.backend_mini.secrity.handler.OAuth2SuccessHandler;
+import com.korit.backend_mini.security.filter.JwtAuthenticationFilter;
+import com.korit.backend_mini.security.handler.OAuth2SuccessHandler;
 import com.korit.backend_mini.service.OAuth2PrincipalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -64,7 +64,7 @@ public class SecurityConfig {
             ).hasRole("ADMIN");
             auth.requestMatchers(
                     "/board/**"
-            ).hasAnyRole("ADMIN", "USER");
+            ).hasAnyRole("ADMIN", "USER", "TEMPORARY_USER");
             auth.requestMatchers(
                     "/user/auth/**",
                     "/admin/auth/**",

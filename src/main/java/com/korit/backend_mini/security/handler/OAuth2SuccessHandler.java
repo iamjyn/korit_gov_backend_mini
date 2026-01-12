@@ -1,10 +1,10 @@
-package com.korit.backend_mini.secrity.handler;
+package com.korit.backend_mini.security.handler;
 
 import com.korit.backend_mini.entity.OAuth2User;
 import com.korit.backend_mini.entity.User;
 import com.korit.backend_mini.repository.OAuth2UserRepository;
 import com.korit.backend_mini.repository.UserRepository;
-import com.korit.backend_mini.secrity.jwt.JwtUtils;
+import com.korit.backend_mini.security.jwt.JwtUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,7 +39,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         Optional<OAuth2User> foundOAuth2User = oAuth2UserRepository.getOAuth2UserByProviderAndProviderUserId(provider, providerUserId);
 
         if (foundOAuth2User.isEmpty()) {
-            response.sendRedirect("http://localhost:3000/auth/oauth2?provider="+provider+"&providerUserId="+providerUserId + "&email=" + email);
+            response.sendRedirect("http://localhost:5173/auth/oauth2?provider="+provider+"&providerUserId="+providerUserId + "&email=" + email);
             return;
         }
 
@@ -50,6 +50,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         String accessToken = jwtUtils.generateAccessToken(foundUser.get().getUserId().toString());
 
-        response.sendRedirect("http://localhost:3000/auth/oauth2/signin?accessToken="+accessToken);
+        response.sendRedirect("http://localhost:5173/auth/oauth2/signin?accessToken="+accessToken);
     }
 }

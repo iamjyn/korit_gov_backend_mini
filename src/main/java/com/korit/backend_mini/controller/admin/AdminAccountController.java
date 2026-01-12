@@ -2,7 +2,7 @@ package com.korit.backend_mini.controller.admin;
 
 import com.korit.backend_mini.dto.account.ChangePasswordReqDto;
 import com.korit.backend_mini.dto.account.ChangeUsernameReqDto;
-import com.korit.backend_mini.secrity.model.PrincipalUser;
+import com.korit.backend_mini.security.model.PrincipalUser;
 import com.korit.backend_mini.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
